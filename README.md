@@ -1,3 +1,3 @@
 # TBImage
 
-A description of this package.
+Image processing extensions
