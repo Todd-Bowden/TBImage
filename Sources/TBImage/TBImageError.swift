@@ -11,4 +11,5 @@ public enum TBImageError: Error {
     case errorCreatingCGContext
     case errorCreatingCGImage
     case unequalImageSizes
+    case invalidPixelFormat
 }
