@@ -11,7 +11,7 @@ kernel void flip_horizontal_rgba(texture2d<half, access::read>  inTexture  [[ te
     
     // Get pixel
     uint w = inTexture.get_width();
-    half4 p = inTexture.read(uint2(w-gid.x, gid.y));
+    half4 p = inTexture.read(uint2(w-gid.x-1, gid.y));
     
     // Write to outTexture
     outTexture.write(p, gid);
@@ -26,7 +26,7 @@ kernel void flip_horizontal_gray(texture2d<half, access::read>  inTexture  [[ te
     
     // Get pixel
     uint w = inTexture.get_width();
-    half p = inTexture.read(uint2(w-gid.x, gid.y)).r;
+    half p = inTexture.read(uint2(w-gid.x-1, gid.y)).r;
     
     // Write to outTexture
     outTexture.write(p, gid);
@@ -41,7 +41,7 @@ kernel void flip_vertical_rgba(texture2d<half, access::read>  inTexture  [[ text
     
     // Get pixel
     uint h = inTexture.get_height();
-    half4 p = inTexture.read(uint2(gid.x, h-gid.y));
+    half4 p = inTexture.read(uint2(gid.x, h-gid.y-1));
     
     // Write to outTexture
     outTexture.write(p, gid);
@@ -56,7 +56,7 @@ kernel void flip_vertical_gray(texture2d<half, access::read>  inTexture  [[ text
     
     // Get pixel
     uint h = inTexture.get_height();
-    half p = inTexture.read(uint2(gid.x, h-gid.y)).r;
+    half p = inTexture.read(uint2(gid.x, h-gid.y-1)).r;
     
     // Write to outTexture
     outTexture.write(p, gid);
