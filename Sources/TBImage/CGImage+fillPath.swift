@@ -11,25 +11,13 @@ import CoreGraphics
 public extension CGImage {
     
     static func fill(path: CGPath, gray: CGFloat = 1) throws -> CGImage {
-        let context = CGContext(
-            data: nil,
-            width: Int(path.boundingBox.width.ceil),
-            height: Int(path.boundingBox.height.ceil),
-            bitsPerComponent: 8,
-            bytesPerRow: 0,
-            space: CGColorSpaceCreateDeviceGray(),
-            bitmapInfo: 0
-        )
-        guard let context else {
-            throw TBImageError.errorCreatingCGContext
-        }
+        let width = Int(path.boundingBox.width.ceil)
+        let height = Int(path.boundingBox.height.ceil)
+        let context = try CGContext.grayContext(width: width, height: height)
         context.addPath(path)
         context.setFillColor(gray: gray, alpha: 1)
         context.fillPath()
-        guard let cgImage = context.makeImage() else {
-            throw TBImageError.errorCreatingCGImage
-        }
-        return cgImage
+        return try context.image()
     }
     
 }
