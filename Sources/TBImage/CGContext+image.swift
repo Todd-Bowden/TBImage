@@ -8,7 +8,7 @@
 import Foundation
 import CoreGraphics
 
-extension CGContext {
+public extension CGContext {
     
     func image() throws -> CGImage {
         guard let cgImage = self.makeImage() else {

@@ -8,7 +8,7 @@
 import Foundation
 import CoreGraphics
 
-extension CGContext {
+public extension CGContext {
     
     static func grayContext(width: Int, height: Int) throws -> CGContext {
         let context = CGContext(
