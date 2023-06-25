@@ -19,8 +19,6 @@ public enum TBImageScaleMethod {
 public extension CGImage {
     
     func scale(width: Int, height: Int, method: TBImageScaleMethod = .bilinear) throws -> CGImage {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        
         let commandBuffer = try TBMakeMetalCommandBuffer.makeDefault()
         let device = commandBuffer.device
         
@@ -40,9 +38,6 @@ public extension CGImage {
         // Commit and wait
         commandBuffer.commit()
         commandBuffer.waitUntilCompleted()
-        
-        let time = CFAbsoluteTimeGetCurrent() - startTime
-        print("\(String(format: "%.05f", time)) seconds")
         
         // Return cgImage
         return try outTexture.cgImage()
