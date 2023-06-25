@@ -30,13 +30,22 @@ public extension CGImage {
         return image
     }
     
-    #if canImport(UIKit)
     var png: Data? {
         try? pngData()
     }
     
+    #if canImport(UIKit)
     func pngData() throws -> Data {
         guard let png = UIImage(cgImage: self).pngData() else {
+            throw TBImageError.pngCreationError
+        }
+        return png
+    }
+    #else
+    func pngData() throws -> Data {
+        let imageRep = NSBitmapImageRep(cgImage: self)
+        imageRep.size = NSSize(width: self.width, height: self.height)
+        guard let png = imageRep.representation(using: NSBitmapImageRep.FileType.png, properties: [:]) else {
             throw TBImageError.pngCreationError
         }
         return png
