@@ -31,6 +31,10 @@ public extension CGImage {
     }
     
     #if canImport(UIKit)
+    var png: Data? {
+        try? pngData()
+    }
+    
     func pngData() throws -> Data {
         guard let png = UIImage(cgImage: self).pngData() else {
             throw TBImageError.pngCreationError
