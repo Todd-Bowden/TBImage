@@ -10,6 +10,10 @@ import CoreGraphics
 
 public extension CGImage {
     
+    static func fill(color: CGColor, size: CGSize) throws -> CGImage {
+        try fill(color: color, width: Int(size.width), height: Int(size.height))
+    }
+    
     static func fill(color: CGColor, width: Int, height: Int) throws -> CGImage {
         let context = try CGContext.rgbaContext(width: width, height: height)
         context.setFillColor(color)
