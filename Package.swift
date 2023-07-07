@@ -16,15 +16,13 @@ let package = Package(
             name: "TBImage",
             targets: ["TBImage"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/Todd-Bowden/TBMetalImage.git", branch: "main")
-    ],
+    dependencies: [],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "TBImage",
-            dependencies: ["TBMetalImage"]),
+            dependencies: []),
         .testTarget(
             name: "TBImageTests",
             dependencies: ["TBImage"]),

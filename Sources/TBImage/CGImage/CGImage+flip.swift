@@ -7,46 +7,21 @@
 
 import Foundation
 import CoreGraphics
-import MetalKit
-import TBMetalImage
 
 public extension CGImage {
     
     func flipHorizontal() throws -> CGImage {
-        try flip(orientation: "horizontal")
+        let context = try self.context()
+        context.scaleBy(x: -1, y: 1)
+        context.draw(self, in: CGRect(x: 0, y: 0, width: self.width, height: self.height))
+        return try context.image()
     }
     
     func flipVertical() throws -> CGImage {
-        try flip(orientation: "vertical")
-    }
-    
-    private func flip(orientation: String) throws -> CGImage {
-        let commandBuffer = try TBMakeMetalCommandBuffer.makeDefault()
-        let device = commandBuffer.device
-        
-        // Create textures
-        let loader = MTKTextureLoader(device: device)
-        let selfTexture = try loader.newTexture(cgImage: self)
-        let outTexture = try device.emptyTexture(width: width, height: height, format: selfTexture.pixelFormat)
-        
-        var function = "flip_" + orientation
-        switch selfTexture.pixelFormat {
-        case .rgba8Unorm:
-            function += "_rgba"
-        case .r8Unorm:
-            function +=  "_gray"
-        default:
-            throw TBImageError.invalidPixelFormat
-        }
-        
-        try commandBuffer.encode(function, bundle: Bundle.module, inTexture: selfTexture, outTexture: outTexture)
-        
-        // Commit and wait
-        commandBuffer.commit()
-        commandBuffer.waitUntilCompleted()
-        
-        // Return cgImage
-        return try outTexture.cgImage()
+        let context = try self.context()
+        context.scaleBy(x: 1, y: -1)
+        context.draw(self, in: CGRect(x: 0, y: 0, width: self.width, height: self.height))
+        return try context.image()
     }
     
 }

@@ -7,13 +7,15 @@
 
 import Foundation
 import CoreGraphics
-import TBMetalImage
 
 public extension CGImage {
     
     func alpha(_ alpha: CGImage) throws -> CGImage {
         try self.assertEqualSize(alpha)
-        return try self.metal(function: "alpha", bundle: Bundle.module, images: [alpha])
+        guard let image = self.masking(alpha) else {
+            throw TBImageError.errorCreatingCGImage
+        }
+        return image
     }
     
 }
