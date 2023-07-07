@@ -12,10 +12,11 @@ public extension CGImage {
     
     func alpha(_ alpha: CGImage) throws -> CGImage {
         try self.assertEqualSize(alpha)
-        guard let image = self.masking(alpha) else {
-            throw TBImageError.errorCreatingCGImage
-        }
-        return image
+        let context = try self.context()
+        let rect = CGRect(x: 0, y: 0, width: width, height: height)
+        context.clip(to: rect, mask: alpha)
+        context.draw(self, in: rect)
+        return try context.image()
     }
     
 }
