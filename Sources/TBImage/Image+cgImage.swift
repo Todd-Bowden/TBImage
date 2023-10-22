@@ -21,6 +21,13 @@ public extension Image {
         let uiImage = UIImage(cgImage: cgImage, scale: screenScale, orientation: orientation)
         self.init(uiImage: uiImage)
     }
+    #else
+    init(cgImage: CGImage) {
+        //let screenScale = NSScreen.main?.backingScaleFactor ?? 1
+        let size = NSSize(width: cgImage.width, height: cgImage.height)
+        let nsImage = NSImage(cgImage: cgImage, size: size)
+        self.init(nsImage: nsImage)
+    }
     #endif
     
 }
