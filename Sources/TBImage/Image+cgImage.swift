@@ -17,7 +17,11 @@ public extension Image {
     
     #if canImport(UIKit)
     init(cgImage: CGImage, orientation: UIImage.Orientation = .up) {
+        #if os(visionOS)
+        let screenScale:CGFloat = 1
+        #else
         let screenScale = UIScreen.main.scale
+        #endif
         let uiImage = UIImage(cgImage: cgImage, scale: screenScale, orientation: orientation)
         self.init(uiImage: uiImage)
     }
