@@ -12,7 +12,7 @@ public extension CGImage {
     
     func alpha(_ alpha: CGImage) throws -> CGImage {
         try self.assertEqualSize(alpha)
-        let context = try self.context()
+        let context = try CGContext.rgbaContext(width:width, height: height)
         let rect = CGRect(x: 0, y: 0, width: width, height: height)
         context.clip(to: rect, mask: alpha)
         context.draw(self, in: rect)
