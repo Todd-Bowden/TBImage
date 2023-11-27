@@ -16,4 +16,10 @@ public extension CGImage {
         return try context.image()
     }
     
+    func scaleRGBA(width: Int, height: Int) throws -> CGImage {
+        let context = try CGContext.rgbaContext(width: width, height: height)
+        context.draw(self, in: CGRect(x: 0, y: 0, width: width, height: height))
+        return try context.image()
+    }
+    
 }
