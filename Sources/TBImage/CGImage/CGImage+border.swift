@@ -11,7 +11,7 @@ import CoreGraphics
 public extension CGImage {
     
     func addBorder(_ border: Int, color: CGColor? = nil) throws -> CGImage {
-        let color = color ?? CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        let color = color ?? CGColor(red: 0, green: 0, blue: 0, alpha: 0)
         let w = self.width + border + border
         let h = self.height + border + border
         let context = try CGContext.rgbaContext(width: w, height: h)
