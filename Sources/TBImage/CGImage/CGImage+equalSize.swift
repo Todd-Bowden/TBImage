@@ -1,6 +1,6 @@
 //
-//  CGImage+assertEqualSize.swift
-//  
+//  CGImage+equalSize.swift
+//
 //
 //  Created by Todd Bowden on 5/20/23.
 //
