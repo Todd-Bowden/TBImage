@@ -21,11 +21,14 @@ public extension CGImage {
         return try context.image()
     }
     
-    func fill(color: CGColor) throws -> CGImage {
+    func fill(color: CGColor, blendMode: CGBlendMode? = nil) throws -> CGImage {
         let context = try CGContext.rgbaContext(width:width, height: height)
         let rect = CGRect(x: 0, y: 0, width: width, height: height)
         context.draw(self, in: rect)
         context.setFillColor(color)
+        if let blendMode {
+            context.setBlendMode(blendMode)
+        }
         context.fill(CGRect(x: 0, y: 0, width: width, height: height))
         return try context.image()
     }
