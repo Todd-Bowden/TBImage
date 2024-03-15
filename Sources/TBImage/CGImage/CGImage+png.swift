@@ -30,6 +30,11 @@ public extension CGImage {
         return image
     }
     
+    static func pngResource(url: URL) throws -> CGImage {
+        let data = try Data(contentsOf: url)
+        return try CGImage.image(png: data)
+    }
+    
     static func pngResource(path: String, bundle: Bundle? = nil) throws -> CGImage {
         let bundle = bundle ?? Bundle.main
         guard let url = bundle.url(forResource: path, withExtension: "png") else {
