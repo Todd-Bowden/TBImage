@@ -10,8 +10,8 @@ import CoreGraphics
 
 public extension CGImage {
     
-    func alpha(_ alpha: CGImage) throws -> CGImage {
-        var alpha = alpha
+    func alpha(_ alpha: CGImage?) throws -> CGImage {
+        guard var alpha = alpha else { return self }
         if self.isNotEqualSize(alpha) {
             alpha = try alpha.scale(width: self.width, height: self.height)
         }
