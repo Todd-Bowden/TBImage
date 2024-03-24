@@ -44,6 +44,12 @@ public extension CGImage {
         return try CGImage.image(png: data)
     }
     
+    static func named(_ name: String, bundle: Bundle? = nil) throws -> CGImage? {
+        let bundle = bundle ?? Bundle.main
+        guard let url = bundle.url(forResource: name, withExtension: "png") ?? bundle.url(forResource: name, withExtension: nil) else { return nil }
+        return try? pngResource(url: url)
+    }
+    
     var png: Data? {
         try? pngData()
     }
