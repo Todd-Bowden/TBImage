@@ -19,4 +19,11 @@ public extension CGImage {
 
 }
 
+public extension UIImage {
+    
+    static func path(_ path: String, bundle: Bundle) -> UIImage? {
+        CGImage.path(path, bundle: bundle)?.uiImage
+    }
+}
+
 #endif
