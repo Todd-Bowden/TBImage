@@ -14,4 +14,6 @@ public enum TBImageError: Error {
     case invalidPixelFormat
     case pngCreationError
     case pngResourceNotFoundAtPath(String)
+    case jpegCreationError
+    case jpegResourceNotFoundAtPath(String)
 }
