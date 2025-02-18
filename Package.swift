@@ -7,7 +7,7 @@ let package = Package(
     name: "TBImage",
     platforms: [
         .macOS(.v13),
-        .iOS(.v16),
+        .iOS(.v13),
         .tvOS(.v16)
     ],
     products: [
